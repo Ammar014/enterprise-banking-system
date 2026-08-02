@@ -1,4 +1,5 @@
 package com.ammarkanani.banking_app.entity;
+
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -53,113 +54,126 @@ public class Customer {
 
     private LocalDateTime updatedAt;
 
-    
+    @PrePersist
+    public void prePersist() {
+
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+
+        updatedAt = LocalDateTime.now();
+
+    }
+
     // public Customer() {
     // }
 
-    
     // public Customer(String firstName, String lastName, String email,
-    //                 String phone, String cnic, String passwordHash,
-    //                 LocalDate dateOfBirth, String status,
-    //                 LocalDateTime createdAt, LocalDateTime updatedAt) {
+    // String phone, String cnic, String passwordHash,
+    // LocalDate dateOfBirth, String status,
+    // LocalDateTime createdAt, LocalDateTime updatedAt) {
 
-    //     this.firstName = firstName;
-    //     this.lastName = lastName;
-    //     this.email = email;
-    //     this.phone = phone;
-    //     this.cnic = cnic;
-    //     this.passwordHash = passwordHash;
-    //     this.dateOfBirth = dateOfBirth;
-    //     this.status = status;
-    //     this.createdAt = createdAt;
-    //     this.updatedAt = updatedAt;
+    // this.firstName = firstName;
+    // this.lastName = lastName;
+    // this.email = email;
+    // this.phone = phone;
+    // this.cnic = cnic;
+    // this.passwordHash = passwordHash;
+    // this.dateOfBirth = dateOfBirth;
+    // this.status = status;
+    // this.createdAt = createdAt;
+    // this.updatedAt = updatedAt;
     // }
 
     // public Long getCustomerId() {
-    //     return customerId;
+    // return customerId;
     // }
 
     // public void setCustomerId(Long customerId) {
-    //     this.customerId = customerId;
+    // this.customerId = customerId;
     // }
 
     // public String getFirstName() {
-    //     return firstName;
+    // return firstName;
     // }
 
     // public void setFirstName(String firstName) {
-    //     this.firstName = firstName;
+    // this.firstName = firstName;
     // }
 
     // public String getLastName() {
-    //     return lastName;
+    // return lastName;
     // }
 
     // public void setLastName(String lastName) {
-    //     this.lastName = lastName;
+    // this.lastName = lastName;
     // }
 
     // public String getEmail() {
-    //     return email;
+    // return email;
     // }
 
     // public void setEmail(String email) {
-    //     this.email = email;
+    // this.email = email;
     // }
 
     // public String getPhone() {
-    //     return phone;
+    // return phone;
     // }
 
     // public void setPhone(String phone) {
-    //     this.phone = phone;
+    // this.phone = phone;
     // }
 
     // public String getCnic() {
-    //     return cnic;
+    // return cnic;
     // }
 
     // public void setCnic(String cnic) {
-    //     this.cnic = cnic;
+    // this.cnic = cnic;
     // }
 
     // public String getPasswordHash() {
-    //     return passwordHash;
+    // return passwordHash;
     // }
 
     // public void setPasswordHash(String passwordHash) {
-    //     this.passwordHash = passwordHash;
+    // this.passwordHash = passwordHash;
     // }
 
     // public LocalDate getDateOfBirth() {
-    //     return dateOfBirth;
+    // return dateOfBirth;
     // }
 
     // public void setDateOfBirth(LocalDate dateOfBirth) {
-    //     this.dateOfBirth = dateOfBirth;
+    // this.dateOfBirth = dateOfBirth;
     // }
 
     // public String getStatus() {
-    //     return status;
+    // return status;
     // }
 
     // public void setStatus(String status) {
-    //     this.status = status;
+    // this.status = status;
     // }
 
     // public LocalDateTime getCreatedAt() {
-    //     return createdAt;
+    // return createdAt;
     // }
 
     // public void setCreatedAt(LocalDateTime createdAt) {
-    //     this.createdAt = createdAt;
+    // this.createdAt = createdAt;
     // }
 
     // public LocalDateTime getUpdatedAt() {
-    //     return updatedAt;
+    // return updatedAt;
     // }
 
     // public void setUpdatedAt(LocalDateTime updatedAt) {
-    //     this.updatedAt = updatedAt;
+    // this.updatedAt = updatedAt;
     // }
 }

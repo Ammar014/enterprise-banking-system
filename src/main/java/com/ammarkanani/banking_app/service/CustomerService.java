@@ -1,11 +1,14 @@
 package com.ammarkanani.banking_app.service;
 
 import com.ammarkanani.banking_app.dto.request.CustomerRequestDTO;
+import com.ammarkanani.banking_app.dto.response.AccountResponseDTO;
 import com.ammarkanani.banking_app.dto.response.CustomerResponseDTO;
 import com.ammarkanani.banking_app.entity.Customer;
 import com.ammarkanani.banking_app.exception.DuplicateResourceException;
 import com.ammarkanani.banking_app.exception.ResourceNotFoundException;
+import com.ammarkanani.banking_app.mapper.AccountMapper;
 import com.ammarkanani.banking_app.mapper.CustomerMapper;
+import com.ammarkanani.banking_app.repository.AccountRepository;
 import com.ammarkanani.banking_app.repository.CustomerRepository;
 
 import java.time.LocalDateTime;
@@ -23,9 +26,11 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository, CustomerMapper customerMapper) {
+    public CustomerService(CustomerRepository customerRepository,
+                            CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
+        
     }
 
     public CustomerResponseDTO createCustomer(CustomerRequestDTO requestDTO) {
@@ -141,17 +146,18 @@ public class CustomerService {
 
     public void deleteCustomer(Long customerId) {
 
-    Customer customer = customerRepository
-            .findById(customerId)
-            .orElseThrow(() ->
-                    new ResourceNotFoundException(
-                            "Customer not found with ID: " + customerId));
+        Customer customer = customerRepository
+                .findById(customerId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Customer not found with ID: " + customerId));
 
-    // customer.setStatus("INACTIVE");
+        // customer.setStatus("INACTIVE");
 
-    // customer.setUpdatedAt(LocalDateTime.now());
+        // customer.setUpdatedAt(LocalDateTime.now());
 
-    customerRepository.save(customer);
-}
+        customerRepository.save(customer);
+    }
+
+
 
 }

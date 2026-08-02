@@ -1,9 +1,13 @@
 package com.ammarkanani.banking_app.mapper;
 
+import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import com.ammarkanani.banking_app.dto.request.AccountRequestDTO;
+import com.ammarkanani.banking_app.dto.request.AccountUpdateRequestDTO;
 import com.ammarkanani.banking_app.dto.response.AccountResponseDTO;
 import com.ammarkanani.banking_app.entity.Account;
 
@@ -21,4 +25,10 @@ public interface AccountMapper {
 
     AccountResponseDTO toResponseDTO(Account account);
 
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateEntity(
+            AccountUpdateRequestDTO dto,
+            @MappingTarget Account account);
+
+    
 }
