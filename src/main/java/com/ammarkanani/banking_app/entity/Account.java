@@ -12,6 +12,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 // import jakarta.persistence.Column;
 // import jakarta.persistence.Entity;
 // import jakarta.persistence.EnumType;
@@ -58,19 +60,32 @@ public class Account {
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @PrePersist
-    public void prePersist() {
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Transaction> transactions;
 
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
+        @PrePersist
+        public void prePersist() {
 
+            createdAt = LocalDateTime.now();
+            updatedAt = LocalDateTime.now();
+
+        }
+
+        @PreUpdate
+        public void preUpdate() {
+
+            updatedAt = LocalDateTime.now();
+
+        }
+
+    public void deposit(BigDecimal amount){
+        this.balance = this.balance.add(amount);
     }
 
-    @PreUpdate
-    public void preUpdate() {
-
-        updatedAt = LocalDateTime.now();
-
+    public void withdraw(BigDecimal amount){
+        this.balance = this.balance.subtract(amount);
     }
+
+    
 
 }
