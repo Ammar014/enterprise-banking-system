@@ -1,6 +1,7 @@
 package com.ammarkanani.banking_app.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.ammarkanani.banking_app.dto.response.CustomerResponseDTO;
 import com.ammarkanani.banking_app.entity.Customer;
@@ -15,6 +16,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     boolean existsByCnic(String cnic);
 
     List<Customer> findByStatus(String status);
+
+    Optional<Customer> findByEmail(String email);
 
 
 }

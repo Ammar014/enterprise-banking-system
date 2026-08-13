@@ -13,7 +13,7 @@ import com.ammarkanani.banking_app.entity.Customer;
 public interface CustomerMapper {
 
     @Mapping(source = "phoneNumber", target = "phone")
-    @Mapping(source = "password", target = "passwordHash")
+    @Mapping(target = "passwordHash", ignore = true)
     Customer toEntity(CustomerRequestDTO dto);
 
     CustomerResponseDTO toResponseDTO(Customer customer);
@@ -26,7 +26,7 @@ public interface CustomerMapper {
     @Mapping(target = "dateOfBirth", ignore = true)
 
     @Mapping(source = "phoneNumber", target = "phone")
-    @Mapping(source = "password", target = "passwordHash")
+    @Mapping(target = "passwordHash", ignore = true)
     void updateEntity(CustomerRequestDTO dto,
                       @MappingTarget Customer customer);
 

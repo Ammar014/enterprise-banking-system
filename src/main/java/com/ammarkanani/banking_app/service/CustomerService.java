@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 
 import jakarta.validation.Valid;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -25,11 +26,14 @@ public class CustomerService {
 
     private final CustomerRepository customerRepository;
     private final CustomerMapper customerMapper;
+    private final PasswordEncoder passwordEncoder;
 
     public CustomerService(CustomerRepository customerRepository,
-                            CustomerMapper customerMapper) {
+                           CustomerMapper customerMapper, 
+                           PasswordEncoder passwordEncoder) {
         this.customerRepository = customerRepository;
         this.customerMapper = customerMapper;
+        this.passwordEncoder = passwordEncoder;
         
     }
 
@@ -55,7 +59,7 @@ public class CustomerService {
 
         customer.setEmail(requestDTO.getEmail());
 
-        customer.setPasswordHash(requestDTO.getPassword());
+        customer.setPasswordHash(passwordEncoder.encode(requestDTO.getPassword()));
 
         customer.setPhone(requestDTO.getPhoneNumber());
 
@@ -134,6 +138,8 @@ public class CustomerService {
 
             customer.setEmail(requestDTO.getEmail());
         }
+
+        customer.setPasswordHash(passwordEncoder.encode(requestDTO.getPassword()));
 
         customerMapper.updateEntity(requestDTO, customer);
 
